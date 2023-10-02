@@ -1,0 +1,44 @@
+name: 🏅Quality
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: 🔢 Install Poetry
+        uses: snok/install-poetry@v1
+
+      - name: 🔋 Install dependencies
+        run: |
+          poetry install -vv --no-interaction --no-ansi
+
+      - name: 🧪 Unit Tests
+        run: |
+          PYTEST_VERSION="$(pytest --version)"
+          COVERAGE_VERSION="$(coverage --version | grep Coverage.py | sed -e 's/\(.*\)version //g' | sed -e 's/ \(.*\)//g')"
+          
+          echo "🧪 $PYTEST_VERSION"
+          echo "📊 coverage $COVERAGE_VERSION"
+
+          coverage run -m pytest -vv --junit-xml=junit.xml .
+          coverage report -m
+
+      - name: 🎨 Codestyle
+        run: ./bin/run-codestyle-check
