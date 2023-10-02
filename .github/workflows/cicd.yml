@@ -34,3 +34,10 @@ jobs:
 
       - name: 🎨 Codestyle
         run: ./bin/run-codestyle-check
+
+      - name: 💨 Smoke test
+        run: |
+          docker-compose build
+          docker-compose run app
+          curl -X POST http://localhost:8000/ -d '{"url": "https://google.com"}'
+          curl http://localhost:8000/9gsi
