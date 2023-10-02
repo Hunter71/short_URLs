@@ -30,15 +30,7 @@ jobs:
           poetry install -vv --no-interaction --no-ansi
 
       - name: 🧪 Unit Tests
-        run: |
-          PYTEST_VERSION="$(pytest --version)"
-          COVERAGE_VERSION="$(coverage --version | grep Coverage.py | sed -e 's/\(.*\)version //g' | sed -e 's/ \(.*\)//g')"
-          
-          echo "🧪 $PYTEST_VERSION"
-          echo "📊 coverage $COVERAGE_VERSION"
-
-          coverage run -m pytest -vv --junit-xml=junit.xml .
-          coverage report -m
+        run: ./bin/run-tests
 
       - name: 🎨 Codestyle
         run: ./bin/run-codestyle-check
