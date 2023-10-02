@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+echo "🎨 Start codestyle checking"
+
+# -------------------------------------------------------
+# ###                   🖤 black                      ###
+# -------------------------------------------------------
+# Return codes for black (rc)
+#   0 - nothing would change
+#   1 - some files require formatting
+# 123 - internal error
+
+BLACK_VERSION="$(poetry run black --version | sed 's/, version//g')"
+
+echo "🖤 $BLACK_VERSION"
+poetry run black --diff --check .
+
+BLACK_RC=$?
+
+# -------------------------------------------------------
+# ###                   🔄 isort                      ###
+# -------------------------------------------------------
+# Return codes for isort (rc)
+#   0 - nothing would change
+#   1 - some files require formatting
+
+ISORT_VERSION="$(poetry run isort --version | grep 'VERSION' | sed -e 's/\(.*\)VERSION //g')"
+
+echo "🔄 isort $ISORT_VERSION"
+poetry run isort --diff --check .
+
+ISORT_RC=$?
+
+# -------------------------------------------------------
+# ###                   🏷 mypy                       ###
+# -------------------------------------------------------
+# Return codes for mypy (rc)
+#   0 - there are no typing errors
+#   1 - typing errors found, should be fixed 😜
+
+MYPY_VERSION="$(poetry run mypy --version)"
+
+echo "🏷 $MYPY_VERSION"
+poetry run mypy .
+
+MYPY_RC=$?
+
+# -------------------------------------------------------
+if [[ $BLACK_RC -ne 0 || $ISORT_RC -ne 0 || MYPY_RC -ne 0 ]]; then
+  echo "🚫 Incorrect formatting, you have to clean this up a bit 🧹 🚮"
+  exit 1
+else
+  echo "👏 Good job! Codestyle is awesome 👌"
+fi

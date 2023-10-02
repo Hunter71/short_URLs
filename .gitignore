@@ -1,0 +1,72 @@
+# Project
+localsettings*.py
+
+# Configuration
+*.cnf
+*.ini
+*.cfg
+
+# Environment
+.env.*
+*.env
+
+# Git
+*~
+**/.git
+
+# Python
+.Python
+.cache/
+.env/
+.hypothesis/
+.mypy_cache/
+pip-log.txt
+pip-delete-this-directory.txt
+__pycache__/
+build/
+develop-eggs/
+dist/
+env/
+*.egg-info
+*.py[cod]
+*$py.class
+*.egg/
+*.egg-info/
+**/__pycache__
+.python-version
+
+# Coverage
+.coverage
+.coverage.*
+codecov.y*ml
+coverage.xml
+lcov.info
+linecount.txt
+*.cover
+htmlcov/
+
+# Pytest and unit tests
+.pytest_cache/
+.tox/
+junit.xml
+nosetests.xml
+
+# IDE
+.idea/
+.vscode/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# C extensions
+.so
+
+# Other
+.DS_Store
+build/
+home/
+tmp/
+var/
+venv/
+.venv/

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+echo "[>] Running test suits..."
+poetry run pytest --version
+poetry run coverage --version
+
+poetry run coverage run -m pytest -vv -m "not integration" --junit-xml=junit.xml shurls
+poetry run coverage report -m
+poetry run coverage xml -o tmp/coverage.xml

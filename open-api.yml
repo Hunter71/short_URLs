@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: Short URLs
+  description: |-
+    The definition of the Short URLs API.
+  version: 0.1.0
+servers:
+  - url: https://localhost:8000/
+
+paths:
+  /:
+    post:
+      summary: Create short URL from the given origin URL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OriginalUrl'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortUrl'
+        '400':
+          description: Missing required information in request body
+        '405':
+          description: Method not allowed
+        '422':
+          description: Invalid URL passed
+
+  /{shortUrlPath}:
+    get:
+      summary: Get the original URL from the short URL
+      parameters:
+        - name: shortUrlPath
+          in: path
+          description: The path of the short URL
+          required: true
+          schema:
+             type: string
+             example: shrt
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OriginalUrl'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+        '405':
+          description: Method not allowed
+
+components:
+  schemas:
+    OriginalUrl:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          example: http://example.com/very-very/long/url/even-longer
+    ShortUrl:
+      type: object
+      properties:
+        short_url:
+          type: string
+          format: uri
+          example: http://localhost:8000/shrt

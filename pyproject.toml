@@ -1,0 +1,69 @@
+[project]
+name = "Short URLs"
+version = "0.1.0"
+description = "Application allowing to create short replacement for the given origin URL"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE.txt" }
+keywords = ["short", "urls"]
+authors = [
+    { name = "Tomasz Zięba", email = "tomasz.zieba.71@gmail.com" },
+]
+maintainers = []
+classifiers = [
+    "Programming Language :: Python"
+]
+
+[tool.poetry]
+name = "Short URLs"
+version = "0.1.0"
+description = "Application allowing to create short replacement for the given origin URL"
+authors = ["Tomasz Zięba <tomasz.zieba.71@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.5"
+djangorestframework = "^3.14.0"
+sqids = "^0.3.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+isort = "^5.12.0"
+mypy = "^1.5.1"
+pytest = "^7.4.2"
+pytest_django = "^4.0"
+coverage = { version = "^7.3.2", extras = ["toml"] }
+django_stubs = "^4.2.4"
+djangorestframework_stubs = "^3.14.2"
+
+[tool.black]
+line-length = 120
+target_version = ["py310"]
+include = '\.pyi?$'
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.mypy]
+ignore_missing_imports = true
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "short_URLs.settings"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "short_URLs.settings"
+python_files = ["test*.py"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.coverage.run]
+omit = [".*", "*/site-packages/*", "*/tests/*"]
+
+[tool.coverage.report]
+fail_under = 50
