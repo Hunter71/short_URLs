@@ -18,7 +18,7 @@ paths:
               $ref: '#/components/schemas/OriginalUrl'
         required: true
       responses:
-        '200':
+        '201':
           description: Successful operation
           content:
             application/json:
