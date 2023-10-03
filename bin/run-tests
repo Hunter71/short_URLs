@@ -3,7 +3,7 @@ set -e
 
 echo "[>] Running test suits..."
 
-$PYTEST_VERSION="$(poetry run pytest --version)"
+PYTEST_VERSION="$(poetry run pytest --version)"
 COVERAGE_VERSION="$(poetry run coverage --version | grep Coverage.py | sed -e 's/\(.*\)version //g' | sed -e 's/ \(.*\)//g')"
 
 echo "🧪 $PYTEST_VERSION"
