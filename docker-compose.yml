@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    command: ./bin/run-server
+    build:
+      context: .
+      target: release
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+
+  codestyle:
+    command: ./bin/run-codestyle-check
+    build:
+      context: .
+      target: dev
+    volumes:
+      - .:/code
+
+  tests:
+    command: ./bin/run-tests
+    build:
+      context: .
+      target: dev
+    volumes:
+      - .:/code

@@ -2,9 +2,13 @@
 set -e
 
 echo "[>] Running test suits..."
-poetry run pytest --version
-poetry run coverage --version
 
-poetry run coverage run -m pytest -vv -m "not integration" --junit-xml=junit.xml shurls
+PYTEST_VERSION="$(poetry run pytest --version)"
+COVERAGE_VERSION="$(poetry run coverage --version | grep Coverage.py | sed -e 's/\(.*\)version //g' | sed -e 's/ \(.*\)//g')"
+
+echo "🧪 $PYTEST_VERSION"
+echo "📊 coverage $COVERAGE_VERSION"
+
+poetry run coverage run -m pytest -vv --junit-xml=junit.xml shurls
 poetry run coverage report -m
 poetry run coverage xml -o tmp/coverage.xml
