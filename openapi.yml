@@ -43,12 +43,8 @@ paths:
              type: string
              example: shrt
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OriginalUrl'
+        '302':
+          description: Redirect to the original URL
         '400':
           description: Bad request
         '404':
