@@ -5,10 +5,6 @@
 
 Application allowing to create short replacement for the given origin URL.
 
-## Documentation
-
-Project's API is available on GitHub Pages: https://hunter71.github.io/short_URLs/
-
 ## Local development
 
 ### Run application
