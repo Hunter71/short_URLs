@@ -62,6 +62,20 @@ If codestyle is ok, you should see the below final message in the console output
 
     👏 Good job! Codestyle is awesome 👌
 
+### Docker-based development
+
+Instead of installing all the dependencies locally, one can build Docker image and start API server in the Docker container:
+
+    docker compose build
+
+    # run tests with coverage
+    docker compose up tests
+    # check codestyle
+    docker compose up codestyle
+
+    # start server
+    docker compose up app
+
 ## API design
 
 ### Generation of the short URL
